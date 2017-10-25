@@ -1,0 +1,101 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :email, class: "control-label" %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :service, class: "control-label" %>
+    <%= text_input f, :service, class: "form-control" %>
+    <%= error_tag f, :service %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :specialty, class: "control-label" %>
+    <%= text_input f, :specialty, class: "form-control" %>
+    <%= error_tag f, :specialty %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :brands, class: "control-label" %>
+    <%= text_input f, :brands, class: "form-control" %>
+    <%= error_tag f, :brands %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :address, class: "control-label" %>
+    <%= text_input f, :address, class: "form-control" %>
+    <%= error_tag f, :address %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :lat, class: "control-label" %>
+    <%= number_input f, :lat, step: "any", class: "form-control" %>
+    <%= error_tag f, :lat %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :lng, class: "control-label" %>
+    <%= number_input f, :lng, step: "any", class: "form-control" %>
+    <%= error_tag f, :lng %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :schedule, class: "control-label" %>
+    <%= text_input f, :schedule, class: "form-control" %>
+    <%= error_tag f, :schedule %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :phone, class: "control-label" %>
+    <%= number_input f, :phone, class: "form-control" %>
+    <%= error_tag f, :phone %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :website, class: "control-label" %>
+    <%= text_input f, :website, class: "form-control" %>
+    <%= error_tag f, :website %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :map_icon, class: "control-label" %>
+    <%= text_input f, :map_icon, class: "form-control" %>
+    <%= error_tag f, :map_icon %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :manager, class: "control-label" %>
+    <%= text_input f, :manager, class: "form-control" %>
+    <%= error_tag f, :manager %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :phone_manager, class: "control-label" %>
+    <%= number_input f, :phone_manager, class: "form-control" %>
+    <%= error_tag f, :phone_manager %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :ranking, class: "control-label" %>
+    <%= number_input f, :ranking, class: "form-control" %>
+    <%= error_tag f, :ranking %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

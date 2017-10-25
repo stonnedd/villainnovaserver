@@ -1,0 +1,83 @@
+<h2>Show Supplier</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @supplier.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @supplier.email %>
+  </li>
+
+  <li>
+    <strong>Service:</strong>
+    <%= @supplier.service %>
+  </li>
+
+  <li>
+    <strong>Specialty:</strong>
+    <%= @supplier.specialty %>
+  </li>
+
+  <li>
+    <strong>Brands:</strong>
+    <%= @supplier.brands %>
+  </li>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @supplier.address %>
+  </li>
+
+  <li>
+    <strong>Lat:</strong>
+    <%= @supplier.lat %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @supplier.lng %>
+  </li>
+
+  <li>
+    <strong>Schedule:</strong>
+    <%= @supplier.schedule %>
+  </li>
+
+  <li>
+    <strong>Phone:</strong>
+    <%= @supplier.phone %>
+  </li>
+
+  <li>
+    <strong>Website:</strong>
+    <%= @supplier.website %>
+  </li>
+
+  <li>
+    <strong>Map icon:</strong>
+    <%= @supplier.map_icon %>
+  </li>
+
+  <li>
+    <strong>Manager:</strong>
+    <%= @supplier.manager %>
+  </li>
+
+  <li>
+    <strong>Phone manager:</strong>
+    <%= @supplier.phone_manager %>
+  </li>
+
+  <li>
+    <strong>Ranking:</strong>
+    <%= @supplier.ranking %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: supplier_path(@conn, :edit, @supplier) %></span>
+<span><%= link "Back", to: supplier_path(@conn, :index) %></span>
