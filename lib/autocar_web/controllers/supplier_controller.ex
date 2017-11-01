@@ -36,6 +36,11 @@ defmodule AutocarWeb.SupplierController do
     json conn, suppliers
   end
 
+   def selectedservice(conn, %{"service" => service})do
+     suppliers = Accounts.slcdservice(service)
+     json conn, suppliers
+   end
+
   def edit(conn, %{"id" => id}) do
     supplier = Accounts.get_supplier!(id)
     changeset = Accounts.change_supplier(supplier)

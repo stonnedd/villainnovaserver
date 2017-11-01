@@ -15,9 +15,9 @@ defmodule AutocarWeb.Router do
 
   scope "/", AutocarWeb do
     pipe_through :browser # Use the default browser stack
-
     get "/", PageController, :index
     resources "/suppliers", SupplierController
+    resources "/services", ServiceController
     
   end
 
@@ -25,5 +25,7 @@ defmodule AutocarWeb.Router do
    scope "/api", AutocarWeb do
      pipe_through :api
      get "/suppliers", SupplierController, :allsuppliers
+     get "/suppliers/:service", SupplierController, :selectedservice
+     get "/services", ServiceController, :services
    end
 end

@@ -1,8 +1,8 @@
 defmodule AutocarWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :autocar
 
-  socket "/socket", AutocarWeb.UserSocket
-  #plug CORSPlug
+  plug CORSPlug
+    socket "/socket", AutocarWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
