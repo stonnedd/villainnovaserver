@@ -18,6 +18,7 @@ defmodule AutocarWeb.Router do
     get "/", PageController, :index
     resources "/suppliers", SupplierController
     resources "/services", ServiceController
+    resources "/mainservices", MainserviceController
     
   end
 
@@ -27,5 +28,7 @@ defmodule AutocarWeb.Router do
      get "/suppliers", SupplierController, :allsuppliers
      get "/suppliers/:service", SupplierController, :selectedservice
      get "/services", ServiceController, :services
+     get "/mainservices", MainserviceController, :mainservices
+     post "/suppliers/create", SupplierController, :createsupplier
    end
 end

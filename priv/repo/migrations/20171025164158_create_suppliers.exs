@@ -18,6 +18,7 @@ defmodule Autocar.Repo.Migrations.CreateSuppliers do
       add :manager, :string
       add :phone_manager, :integer
       add :ranking, :integer
+      add :password, :string
 
       timestamps()
     end
