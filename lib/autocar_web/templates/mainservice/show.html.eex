@@ -1,0 +1,13 @@
+<h2>Show Mainservice</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @mainservice.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: mainservice_path(@conn, :edit, @mainservice) %></span>
+<span><%= link "Back", to: mainservice_path(@conn, :index) %></span>

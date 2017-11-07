@@ -1,0 +1,5 @@
+<h2>New Mainservice</h2>
+
+<%= render "form.html", Map.put(assigns, :action, mainservice_path(@conn, :create)) %>
+
+<span><%= link "Back", to: mainservice_path(@conn, :index) %></span>
