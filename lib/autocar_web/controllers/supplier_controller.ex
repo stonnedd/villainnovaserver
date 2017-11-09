@@ -25,15 +25,6 @@ defmodule AutocarWeb.SupplierController do
     end
   end
 
-  # def createsupplier(conn, %{"supplier" => supplier_params}) do
-  #   with {:ok, %Supplier{} = supplier} <- Accounts.create_supplier(supplier_params) do
-  #     conn 
-  #     |> put_status(:created)
-  #     |> put_resp_header("location", supplier_path(conn, :show, supplier))
-  #     |> render("show.json", supplier_params: supplier)
-  #   end
-  # end
-
   def createsupplier(conn, %{"supplier" => supplier_params}) do
     case Accounts.create_supplier(supplier_params) do
       {:ok, supplier} ->

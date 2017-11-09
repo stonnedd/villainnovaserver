@@ -12,7 +12,7 @@ defmodule Autocar.Catalogs do
   end
 
   def lst_services do
-    Repo.all(from s in Service, select: s.name)
+    Repo.all(from s in Service, order_by: s.name, select: s.name )
   end
 
   def get_service!(id), do: Repo.get!(Service, id)
@@ -44,6 +44,9 @@ defmodule Autocar.Catalogs do
     Repo.all(Mainservice)
   end
 
+  def lst_mainservices do
+    Repo.all(from s in Mainservice, order_by: s.name, select: s.name )
+  end
 
   def get_mainservice!(id), do: Repo.get!(Mainservice, id)
 

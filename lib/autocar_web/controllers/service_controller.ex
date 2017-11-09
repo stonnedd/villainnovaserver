@@ -5,7 +5,7 @@ defmodule AutocarWeb.ServiceController do
   alias Autocar.Catalogs.Service
 
   def services(conn, _params) do
-    services = Catalogs.list_services()
+    services = Catalogs.lst_services()
     json conn, services
   end
 

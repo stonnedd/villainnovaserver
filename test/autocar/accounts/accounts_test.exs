@@ -90,4 +90,70 @@ defmodule Autocar.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_supplier(supplier)
     end
   end
+
+  describe "customers" do
+    alias Autocar.Accounts.Customer
+
+    @valid_attrs %{email: "some email", name: "some name", password: "some password", phone: 42}
+    @update_attrs %{email: "some updated email", name: "some updated name", password: "some updated password", phone: 43}
+    @invalid_attrs %{email: nil, name: nil, password: nil, phone: nil}
+
+    def customer_fixture(attrs \\ %{}) do
+      {:ok, customer} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_customer()
+
+      customer
+    end
+
+    test "list_customers/0 returns all customers" do
+      customer = customer_fixture()
+      assert Accounts.list_customers() == [customer]
+    end
+
+    test "get_customer!/1 returns the customer with given id" do
+      customer = customer_fixture()
+      assert Accounts.get_customer!(customer.id) == customer
+    end
+
+    test "create_customer/1 with valid data creates a customer" do
+      assert {:ok, %Customer{} = customer} = Accounts.create_customer(@valid_attrs)
+      assert customer.email == "some email"
+      assert customer.name == "some name"
+      assert customer.password == "some password"
+      assert customer.phone == 42
+    end
+
+    test "create_customer/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_customer(@invalid_attrs)
+    end
+
+    test "update_customer/2 with valid data updates the customer" do
+      customer = customer_fixture()
+      assert {:ok, customer} = Accounts.update_customer(customer, @update_attrs)
+      assert %Customer{} = customer
+      assert customer.email == "some updated email"
+      assert customer.name == "some updated name"
+      assert customer.password == "some updated password"
+      assert customer.phone == 43
+    end
+
+    test "update_customer/2 with invalid data returns error changeset" do
+      customer = customer_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_customer(customer, @invalid_attrs)
+      assert customer == Accounts.get_customer!(customer.id)
+    end
+
+    test "delete_customer/1 deletes the customer" do
+      customer = customer_fixture()
+      assert {:ok, %Customer{}} = Accounts.delete_customer(customer)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_customer!(customer.id) end
+    end
+
+    test "change_customer/1 returns a customer changeset" do
+      customer = customer_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_customer(customer)
+    end
+  end
 end

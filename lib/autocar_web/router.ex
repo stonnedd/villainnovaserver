@@ -19,7 +19,7 @@ defmodule AutocarWeb.Router do
     resources "/suppliers", SupplierController
     resources "/services", ServiceController
     resources "/mainservices", MainserviceController
-    
+    resources "/customers", CustomerController
   end
 
   #Other scopes may use custom stacks.
@@ -30,5 +30,7 @@ defmodule AutocarWeb.Router do
      get "/services", ServiceController, :services
      get "/mainservices", MainserviceController, :mainservices
      post "/suppliers/create", SupplierController, :createsupplier
+     post "/customers/create", CustomerController, :createcustomer
+
    end
 end
