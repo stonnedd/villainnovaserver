@@ -29,8 +29,9 @@ defmodule AutocarWeb.Router do
      get "/suppliers/:service", SupplierController, :selectedservice
      get "/services", ServiceController, :services
      get "/mainservices", MainserviceController, :mainservices
+     get "email/customers/:email", CustomerController, :showemail
+     get "email/suppliers/:email", SupplierController, :showemail
      post "/suppliers/create", SupplierController, :createsupplier
      post "/customers/create", CustomerController, :createcustomer
-
    end
 end

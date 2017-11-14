@@ -53,7 +53,6 @@ defmodule AutocarWeb.ServiceController do
         render(conn, "edit.html", service: service, changeset: changeset)
     end
   end
-  
 
 
   def delete(conn, %{"id" => id}) do

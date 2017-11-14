@@ -38,6 +38,11 @@ defmodule AutocarWeb.SupplierController do
     render(conn, "show.html", supplier: supplier)
   end
 
+  def showemail(conn, %{"email" => email})do
+    email = Accounts.get_s_email(email)
+    json conn, email
+  end 
+
   def allsuppliers(conn, _params) do
     suppliers = Accounts.list_suppliers()
     #render(conn, "index.json", suppliers: suppliers)

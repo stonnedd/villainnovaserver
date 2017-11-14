@@ -1,10 +1,11 @@
 defmodule Autocar.Accounts do
 
   import Ecto.Query, warn: false
+
   alias Autocar.Repo
-
   alias Autocar.Accounts.Supplier
-
+  alias Autocar.Accounts.Customer
+  
   def list_suppliers do
     Repo.all(Supplier)
   end
@@ -14,6 +15,10 @@ defmodule Autocar.Accounts do
   end
 
   def get_supplier!(id), do: Repo.get!(Supplier, id)
+
+  def get_s_email(email) do
+    Repo.all(from s in Supplier , where: s.email == ^email, select: s.email)
+ end 
 
   def create_supplier(attrs \\ %{}) do
     %Supplier{}
@@ -35,98 +40,34 @@ defmodule Autocar.Accounts do
     Supplier.changeset(supplier, %{})
   end
 
-  alias Autocar.Accounts.Customer
-
-  @doc """
-  Returns the list of customers.
-
-  ## Examples
-
-      iex> list_customers()
-      [%Customer{}, ...]
-
-  """
+  #CUSTOMERS
+  
   def list_customers do
     Repo.all(Customer)
   end
 
-  @doc """
-  Gets a single customer.
-
-  Raises `Ecto.NoResultsError` if the Customer does not exist.
-
-  ## Examples
-
-      iex> get_customer!(123)
-      %Customer{}
-
-      iex> get_customer!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_customer!(id), do: Repo.get!(Customer, id)
 
-  @doc """
-  Creates a customer.
-
-  ## Examples
-
-      iex> create_customer(%{field: value})
-      {:ok, %Customer{}}
-
-      iex> create_customer(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
+  def get_c_email(email) do
+     Repo.all(from c in Customer , where: c.email == ^email, select: c.email)
+  end 
+ 
   def create_customer(attrs \\ %{}) do
     %Customer{}
     |> Customer.changeset(attrs)
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a customer.
-
-  ## Examples
-
-      iex> update_customer(customer, %{field: new_value})
-      {:ok, %Customer{}}
-
-      iex> update_customer(customer, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_customer(%Customer{} = customer, attrs) do
     customer
     |> Customer.changeset(attrs)
     |> Repo.update()
   end
-
-  @doc """
-  Deletes a Customer.
-
-  ## Examples
-
-      iex> delete_customer(customer)
-      {:ok, %Customer{}}
-
-      iex> delete_customer(customer)
-      {:error, %Ecto.Changeset{}}
-
-  """
+  
   def delete_customer(%Customer{} = customer) do
     Repo.delete(customer)
   end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking customer changes.
-
-  ## Examples
-
-      iex> change_customer(customer)
-      %Ecto.Changeset{source: %Customer{}}
-
-  """
+  
   def change_customer(%Customer{} = customer) do
     Customer.changeset(customer, %{})
   end
