@@ -12,13 +12,14 @@ defmodule Autocar.Repo.Migrations.CreateSuppliers do
       add :lat, :float
       add :lng, :float
       add :schedule, :string
-      add :phone, :integer
+      add :phone, :string
       add :website, :string
       add :map_icon, :string
       add :manager, :string
-      add :phone_manager, :integer
+      add :phone_manager, :string
       add :ranking, :integer
       add :password, :string
+      add :is_active, :boolean
 
       timestamps()
     end

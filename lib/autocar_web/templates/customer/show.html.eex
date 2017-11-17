@@ -22,6 +22,11 @@
     <%= @customer.password %>
   </li>
 
+  <li>
+    <strong>Id:</strong>
+    <%= @customer.id %>
+  </li>
+
 </ul>
 
 <span><%= link "Edit", to: customer_path(@conn, :edit, @customer) %></span>

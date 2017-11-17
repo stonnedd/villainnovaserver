@@ -5,7 +5,7 @@ defmodule Autocar.Repo.Migrations.CreateCustomers do
     create table(:customers) do
       add :name, :string
       add :email, :string
-      add :phone, :integer
+      add :phone, :string
       add :password, :string
 
       timestamps()

@@ -8,7 +8,7 @@ defmodule Autocar.Accounts.Customer do
     field :email, :string
     field :name, :string
     field :password, :string
-    field :phone, :integer
+    field :phone, :string
 
     timestamps()
   end

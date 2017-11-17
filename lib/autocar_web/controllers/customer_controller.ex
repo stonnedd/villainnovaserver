@@ -31,7 +31,7 @@ defmodule AutocarWeb.CustomerController do
         json conn |> put_status(:created), customer
     end
   end
-
+  
   def show(conn, %{"id" => id}) do
     customer = Accounts.get_customer!(id)
     render(conn, "show.html", customer: customer)

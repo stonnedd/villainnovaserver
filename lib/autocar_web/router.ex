@@ -33,6 +33,6 @@ defmodule AutocarWeb.Router do
      get "/email/suppliers/:email", SupplierController, :showemail
      post "/suppliers/create", SupplierController, :createsupplier
      post "/customers/create", CustomerController, :createcustomer
-     resources "/sessions", SessionController, only: [:new, :create, :delete]
+     resources "/auth", AuthController, only: [:new, :create, :delete]
    end
 end
