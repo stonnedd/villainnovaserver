@@ -3,11 +3,6 @@
 <ul>
 
   <li>
-    <strong>Name:</strong>
-    <%= @supplier.name %>
-  </li>
-
-  <li>
     <strong>Email:</strong>
     <%= @supplier.email %>
   </li>
@@ -47,10 +42,7 @@
     <%= @supplier.schedule %>
   </li>
 
-  <li>
-    <strong>Phone:</strong>
-    <%= @supplier.phone %>
-  </li>
+ 
 
   <li>
     <strong>Website:</strong>

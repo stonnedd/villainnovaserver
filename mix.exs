@@ -45,7 +45,8 @@ defmodule Autocar.Mixfile do
       {:guardian, "~> 1.0-beta"},
       {:comeonin, "~> 4.0"},
       {:poison, "~> 3.1"},
-      
+      {:bcrypt_elixir, "~> 0.12"},
+      {:ja_serializer, "~> 0.12.0"},
     ]
   end
 

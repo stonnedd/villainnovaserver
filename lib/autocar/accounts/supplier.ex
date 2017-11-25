@@ -12,15 +12,12 @@ defmodule Autocar.Accounts.Supplier do
     field :lng, :float
     field :manager, :string
     field :map_icon, :string
-    field :name, :string
-    field :phone, :string
     field :phone_manager, :string
     field :ranking, :integer
     field :schedule, :string
     field :service, :string
     field :specialty, :string
     field :website, :string
-    field :password, :string
     field :is_active, :boolean
     timestamps()
   end
@@ -28,7 +25,7 @@ defmodule Autocar.Accounts.Supplier do
   @doc false
   def changeset(%Supplier{} = supplier, attrs) do
     supplier
-    |> cast(attrs, [:name, :email, :service, :specialty, :brands, :address, :lat, :lng, :schedule, :phone, :map_icon, :manager, :phone_manager, :ranking, :password, :website])
+    |> cast(attrs, [:email, :service, :specialty, :brands, :address, :lat, :lng, :schedule, :map_icon, :manager, :phone_manager, :ranking, :website, :is_active])
     |> validate_required([])
     |> unique_constraint(:email)
   end

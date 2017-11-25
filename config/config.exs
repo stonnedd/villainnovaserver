@@ -22,13 +22,14 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :autocar, Autocar.Guardian,
-  allowed_algos: ["HS512"],
+config :autocar, Autocar.Auth.Guardian,
+  #allowed_algos: ["HS512"],
   issuer: "autocar",
-  secret_key: System.get_env("GUARDIAN_SECRET") || "roVW67MgLEK1iqcTY96EmNOCAj0AVXPt2ifOBKe712C8/HEwDrw7LWileJV+PobY",
-  verify_module: Guardian.JWT, 
-  ttl: { 30, :days }, 
-  serializer: Autocar.Guardian
+  #secret_key: "foobar"
+  secret_key: System.get_env("GUARDIAN_SECRET") || "DEouSlLZxduAamyXWxTV64OMcQf+VJK0GRsnTI8ood0AnPN6EvJgUEjv4SAwNL/3"
+  #verify_module: Guardian.JWT, 
+  #ttl: { 30, :days } 
+ # serializer: Autocar.GuardianSerializer
   #verify_issuer: true,
   
   #secret_key: to_string(Mix.env) <> "SuPerseCret_aBraCadabrA"

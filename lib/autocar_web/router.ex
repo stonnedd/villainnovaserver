@@ -13,17 +13,25 @@ defmodule AutocarWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug :accepts, ["json"]
+    #plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    #plug Guardian.Plug.LoadResource
+    plug Autocar.Auth.Pipeline
+    #plug JaSerializer.Deserializer
+  end
+
   scope "/", AutocarWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser 
     get "/", PageController, :index
     resources "/suppliers", SupplierController
     resources "/services", ServiceController
     resources "/mainservices", MainserviceController
     resources "/customers", CustomerController
+    resources "/users", UserController
   end
 
-  #Other scopes may use custom stacks.
-   scope "/api", AutocarWeb do
+  scope "/api", AutocarWeb do
      pipe_through :api
      get "/suppliers", SupplierController, :allsuppliers
      get "/suppliers/:service", SupplierController, :selectedservice
@@ -33,6 +41,15 @@ defmodule AutocarWeb.Router do
      get "/email/suppliers/:email", SupplierController, :showemail
      post "/suppliers/create", SupplierController, :createsupplier
      post "/customers/create", CustomerController, :createcustomer
-     resources "/auth", AuthController, only: [:new, :create, :delete]
+     post "/auth", AuthController, :sing_in
+     post "/auth/signin", AuthController, :sing_in
+     post "/users/create", UserController, :create_user
+     get "/email/users/:email", UserController, :show_email
    end
+
+  scope "/api_auth", AutocarWeb do
+    pipe_through :api_auth
+    get "/logged", LoggedController, :show_msg
+  end 
+
 end

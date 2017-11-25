@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      
       <th>Email</th>
       <th>Service</th>
       <th>Specialty</th>
@@ -12,7 +12,7 @@
       <th>Lat</th>
       <th>Lng</th>
       <th>Schedule</th>
-      <th>Phone</th>
+      
       <th>Website</th>
       <th>Map icon</th>
       <th>Manager</th>
@@ -25,7 +25,7 @@
   <tbody>
 <%= for supplier <- @suppliers do %>
     <tr>
-      <td><%= supplier.name %></td>
+      
       <td><%= supplier.email %></td>
       <td><%= supplier.service %></td>
       <td><%= supplier.specialty %></td>
@@ -34,7 +34,6 @@
       <td><%= supplier.lat %></td>
       <td><%= supplier.lng %></td>
       <td><%= supplier.schedule %></td>
-      <td><%= supplier.phone %></td>
       <td><%= supplier.website %></td>
       <td><%= supplier.map_icon %></td>
       <td><%= supplier.manager %></td>
