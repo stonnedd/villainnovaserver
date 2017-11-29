@@ -99,6 +99,8 @@ defmodule Autocar.Accounts do
     user
     |> User.changeset(%{token: token})
     |> Repo.update()
+    IO.inspect "¨¨¨*******UPDATE TOKN;"
+    IO.inspect user
   end
 
   def delete_user(%User{} = user) do
@@ -109,7 +111,11 @@ defmodule Autocar.Accounts do
     User.changeset(user, %{})
   end
 
+  def get_user_by_token(token) do
+    Repo.all(from c in User , where: c.token == ^token)
+  end 
+
   def get_email(email) do
     Repo.all(from c in User , where: c.email == ^email, select: c.email)
- end 
+  end 
 end

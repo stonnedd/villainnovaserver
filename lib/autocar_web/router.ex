@@ -45,6 +45,7 @@ defmodule AutocarWeb.Router do
      post "/auth/signin", AuthController, :sing_in
      post "/users/create", UserController, :create_user
      get "/email/users/:email", UserController, :show_email
+     get "/logged/user/:token", UserController, :get_user_by_token
    end
 
   scope "/api_auth", AutocarWeb do
