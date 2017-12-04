@@ -112,8 +112,19 @@ defmodule Autocar.Accounts do
   end
 
   def get_user_by_token(token) do
-    Repo.all(from c in User , where: c.token == ^token)
+     query = from u in User, 
+      where: u.token == ^token,
+      select: %{id: u.id, name: u.name, email: u.email, phone: u.phone, profile: u.profile}
+      Repo.all(query) 
   end 
+
+  def get_user_by_id(id) do
+    query = from u in User, 
+     where: u.id == ^id,
+     select: %{id: u.id, name: u.name, email: u.email, phone: u.phone, profile: u.profile}
+     Repo.all(query) 
+ end 
+
 
   def get_email(email) do
     Repo.all(from c in User , where: c.email == ^email, select: c.email)

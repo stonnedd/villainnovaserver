@@ -73,9 +73,12 @@ defmodule AutocarWeb.UserController do
   end
   
   def  get_user_by_token(conn, %{"token" => token})do
-    IO.inspect "*********token para busqueda********::::"
-    IO.inspect token
     user = Accounts.get_user_by_token(token)
+    json conn, user
+  end
+
+  def get_user_by_id(conn, %{"id" => id}) do
+    user = Accounts.get_user_by_id(id)
     json conn, user
   end
 

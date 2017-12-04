@@ -26,9 +26,9 @@ config :autocar, Autocar.Auth.Guardian,
   #allowed_algos: ["HS512"],
   issuer: "autocar",
   #secret_key: "foobar"
-  secret_key: System.get_env("GUARDIAN_SECRET") || "DEouSlLZxduAamyXWxTV64OMcQf+VJK0GRsnTI8ood0AnPN6EvJgUEjv4SAwNL/3"
+  secret_key: System.get_env("GUARDIAN_SECRET") || "DEouSlLZxduAamyXWxTV64OMcQf+VJK0GRsnTI8ood0AnPN6EvJgUEjv4SAwNL/3",
   #verify_module: Guardian.JWT, 
-  #ttl: { 30, :days } 
+  ttl: { 30, :days } 
  # serializer: Autocar.GuardianSerializer
   #verify_issuer: true,
   
