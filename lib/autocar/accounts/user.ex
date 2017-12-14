@@ -1,7 +1,7 @@
 defmodule Autocar.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Autocar.Accounts.User
+  alias Autocar.Accounts.{User, Provider}
   alias Comeonin.Bcrypt
 
   schema "users" do
@@ -11,7 +11,7 @@ defmodule Autocar.Accounts.User do
     field :phone, :string
     field :profile, :string
     field :token, :string, size: 512
-
+    has_many :providers, Provider
     timestamps()
   end
 

@@ -5,14 +5,14 @@ defmodule Autocar.Accounts.Supplier do
 
 
   schema "suppliers" do
+    field :places_name, :string
     field :address, :string
     field :brands, :string
     field :email, :string
     field :lat, :float
     field :lng, :float
-    field :manager, :string
     field :map_icon, :string
-    field :phone_manager, :string
+    field :aditional_phone, :string
     field :ranking, :integer
     field :schedule, :string
     field :service, :string

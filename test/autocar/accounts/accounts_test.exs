@@ -222,4 +222,88 @@ defmodule Autocar.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
+
+  describe "providers" do
+    alias Autocar.Accounts.Provider
+
+    @valid_attrs %{address: "some address", aditional_phone: "some aditional_phone", brands: "some brands", company_name: "some company_name", is_active: true, lat: 120.5, lng: 120.5, map_icon: "some map_icon", ranking: 120.5, schedule: "some schedule", service: "some service", specialty: "some specialty", website: "some website"}
+    @update_attrs %{address: "some updated address", aditional_phone: "some updated aditional_phone", brands: "some updated brands", company_name: "some updated company_name", is_active: false, lat: 456.7, lng: 456.7, map_icon: "some updated map_icon", ranking: 456.7, schedule: "some updated schedule", service: "some updated service", specialty: "some updated specialty", website: "some updated website"}
+    @invalid_attrs %{address: nil, aditional_phone: nil, brands: nil, company_name: nil, is_active: nil, lat: nil, lng: nil, map_icon: nil, ranking: nil, schedule: nil, service: nil, specialty: nil, website: nil}
+
+    def provider_fixture(attrs \\ %{}) do
+      {:ok, provider} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Accounts.create_provider()
+
+      provider
+    end
+
+    test "list_providers/0 returns all providers" do
+      provider = provider_fixture()
+      assert Accounts.list_providers() == [provider]
+    end
+
+    test "get_provider!/1 returns the provider with given id" do
+      provider = provider_fixture()
+      assert Accounts.get_provider!(provider.id) == provider
+    end
+
+    test "create_provider/1 with valid data creates a provider" do
+      assert {:ok, %Provider{} = provider} = Accounts.create_provider(@valid_attrs)
+      assert provider.address == "some address"
+      assert provider.aditional_phone == "some aditional_phone"
+      assert provider.brands == "some brands"
+      assert provider.company_name == "some company_name"
+      assert provider.is_active == true
+      assert provider.lat == 120.5
+      assert provider.lng == 120.5
+      assert provider.map_icon == "some map_icon"
+      assert provider.ranking == 120.5
+      assert provider.schedule == "some schedule"
+      assert provider.service == "some service"
+      assert provider.specialty == "some specialty"
+      assert provider.website == "some website"
+    end
+
+    test "create_provider/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_provider(@invalid_attrs)
+    end
+
+    test "update_provider/2 with valid data updates the provider" do
+      provider = provider_fixture()
+      assert {:ok, provider} = Accounts.update_provider(provider, @update_attrs)
+      assert %Provider{} = provider
+      assert provider.address == "some updated address"
+      assert provider.aditional_phone == "some updated aditional_phone"
+      assert provider.brands == "some updated brands"
+      assert provider.company_name == "some updated company_name"
+      assert provider.is_active == false
+      assert provider.lat == 456.7
+      assert provider.lng == 456.7
+      assert provider.map_icon == "some updated map_icon"
+      assert provider.ranking == 456.7
+      assert provider.schedule == "some updated schedule"
+      assert provider.service == "some updated service"
+      assert provider.specialty == "some updated specialty"
+      assert provider.website == "some updated website"
+    end
+
+    test "update_provider/2 with invalid data returns error changeset" do
+      provider = provider_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_provider(provider, @invalid_attrs)
+      assert provider == Accounts.get_provider!(provider.id)
+    end
+
+    test "delete_provider/1 deletes the provider" do
+      provider = provider_fixture()
+      assert {:ok, %Provider{}} = Accounts.delete_provider(provider)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_provider!(provider.id) end
+    end
+
+    test "change_provider/1 returns a provider changeset" do
+      provider = provider_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_provider(provider)
+    end
+  end
 end

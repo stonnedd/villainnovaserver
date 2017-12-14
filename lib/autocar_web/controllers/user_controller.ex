@@ -6,7 +6,10 @@ defmodule AutocarWeb.UserController do
 
   def index(conn, _params) do
     users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    IO.inspect "++++++++++++++++++++++++"
+    IO.inspect users
+    render(conn, "index.json", users: users)
+    #json conn, users
   end
 
   def new(conn, _params) do
@@ -17,7 +20,9 @@ defmodule AutocarWeb.UserController do
   def create_user(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
-        json conn |> put_status(:created), user
+        json conn, user.id 
+      {:error} ->
+        json conn, nil
     end
   end
 
@@ -36,7 +41,8 @@ defmodule AutocarWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.html", user: user)
+    render(conn, "show.json", user: user)
+    #json conn, user
   end
 
   def edit(conn, %{"id" => id}) do
@@ -79,6 +85,8 @@ defmodule AutocarWeb.UserController do
 
   def get_user_by_id(conn, %{"id" => id}) do
     user = Accounts.get_user_by_id(id)
+    IO.inspect "USER::::::::::::::::::"
+    IO.inspect user
     json conn, user
   end
 

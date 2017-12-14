@@ -5,13 +5,12 @@ defmodule AutocarWeb.AuthController do
     alias Autocar.Auth.Guardian
     
     plug :scrub_params, "user" when action in [:sign_in_user]
-
    
 
-    defp login(conn, user) do
-        conn
-        |> Guardian.Plug.sign_in(conn, user)
-    end
+    # defp login(conn, user) do
+    #     conn
+    #     |> Guardian.Plug.sign_in(conn, user)
+    # end
 
     def sing_in(conn, %{"session" => %{"email" => email,"password" => password}}) do 
         Auth.authenticate_user(email, password)
