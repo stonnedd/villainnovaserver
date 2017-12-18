@@ -32,12 +32,7 @@ defmodule AutocarWeb.Router do
 
   scope "/api", AutocarWeb do
      pipe_through :api
-
-     get "/suppliers", SupplierController, :allsuppliers
-     get "/suppliers/:service", SupplierController, :selectedservice
-     get "/email/suppliers/:email", SupplierController, :showemail
-     post "/suppliers/create", SupplierController, :createsupplier
-     
+         
      get "/services", ServiceController, :services
      get "/mainservices", MainserviceController, :mainservices
      
@@ -52,11 +47,10 @@ defmodule AutocarWeb.Router do
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider
      end
+     put "/provider/update/:id", ProviderController, :update_provider
      get "/providers/service/:service", ProviderController, :get_by_service
      get "/providers/user/:user_id", ProviderController, :get_by_user_id
      get "/providers", ProviderController, :index
-     
-     
    end
 
   scope "/api_auth", AutocarWeb do
