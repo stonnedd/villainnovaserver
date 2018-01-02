@@ -1,18 +1,17 @@
 defmodule AutocarWeb.ProviderController do
     use AutocarWeb, :controller
     alias Autocar.Accounts
-    alias Autocar.Accounts.{Provider, User}
     import Ecto.Query, warn: false
-    alias Autocar.Repo
+    
     #plug :scrub_params, "provider" when action in [:add_provider]
 
 
     def add_provider(conn, %{"provider"=> provider_params, "user_id"=> user_id }) do
         attr = Map.put(provider_params, "user_id" ,user_id)
         case Accounts.create_provider(attr)do
-            {:ok, provider } ->
+            {:ok, provider} ->
                 json conn, :ok
-            {:error} ->
+            {:error, provider} ->
                 json conn, nil
         end
     end
@@ -20,9 +19,9 @@ defmodule AutocarWeb.ProviderController do
     def update_provider(conn, %{"provider"=> provider_params, "id"=>id}) do
         provider= Accounts.get_provider!(id)
         case Accounts.update_provider(provider, provider_params) do
-            {:ok, provider } ->
+            {:ok, provider} ->
                 json conn, :updated
-            {:error} ->
+            {:error, provider} ->
                 json conn, nil
         end
     end

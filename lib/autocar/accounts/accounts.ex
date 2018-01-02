@@ -95,13 +95,12 @@ defmodule Autocar.Accounts do
 
  
   def create_provider(attrs \\ %{}) do
-    
+    IO.inspect "_______________________________________________________"
      %Provider{}
      |> Provider.changeset(attrs)
      #|> Repo.preload(:user)
      #|> Ecto.Changeset.cast_assoc(:user, with: &User.changeset/2)
      |> Repo.insert()
-    
   end
 
   def update_provider(%Provider{} = provider, attrs) do

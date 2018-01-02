@@ -46,11 +46,16 @@ defmodule AutocarWeb.Router do
      
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider
+      post "/CMS/requests", RequestController, :create
+      get "/CMS/requests", RequestController, :get_by_user_id
      end
      put "/provider/update/:id", ProviderController, :update_provider
      get "/providers/service/:service", ProviderController, :get_by_service
      get "/providers/user/:user_id", ProviderController, :get_by_user_id
      get "/providers", ProviderController, :index
+
+
+
    end
 
   scope "/api_auth", AutocarWeb do

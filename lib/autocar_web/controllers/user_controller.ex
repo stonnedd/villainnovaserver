@@ -34,8 +34,8 @@ defmodule AutocarWeb.UserController do
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
-        render(conn, "new.html", changeset: changeset)
         |> put_flash(:error, "User created successfully.")
+        render(conn, "new.html", changeset: changeset)
     end
   end
 

@@ -25,7 +25,8 @@ defmodule AutocarWeb.ProviderView do
             schedule: provider.schedule,
             service: provider.service,
             specialty: provider.specialty,
-            website: provider.website
+            website: provider.website,
+            status: provider.status
         }
     end
   end
