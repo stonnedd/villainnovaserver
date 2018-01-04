@@ -18,21 +18,13 @@ defmodule AutocarWeb.RequestController do
 
   def create(conn, %{"request" => request_params, "user_id"=> user_id}) do
     attr = Map.put(request_params, "user_id" ,user_id)
-    IO.inspect "||||||||||||||||||||||||||||||||"
-    IO.inspect attr
     case CMS.create_request(attr)do
       {:ok, request} ->
-          json conn, :ok
+        #json conn, :ok
+        render(conn, "show.json", request: request)
       {:error, request} ->
-          json conn, request
-      
+        json conn, nil
     end
-    # with {:ok, %Request{} = request} <- CMS.create_request(attr) do
-    #   conn
-    #   |> put_status(:created)
-    #   #|> put_resp_header("location", request_path(conn, :show, request))
-    #   |> render("show.json", request: request)
-    # end
   end
 
   def show(conn, %{"id" => id}) do
