@@ -34,6 +34,14 @@ config :autocar, Autocar.Auth.Guardian,
   
   #secret_key: to_string(Mix.env) <> "SuPerseCret_aBraCadabrA"
 
-# Import environment specific config. This must remain at the bottom
+config :cloudex,
+  api_key: "768843128173564",
+  secret: "HAsGAEMco0b-ikHrxk_WYuMsLKk",
+  cloud_name: "acimagestore"
+
+config :arc,
+  storage: Arc.Storage.Local
+
+  # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

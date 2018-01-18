@@ -4,27 +4,44 @@ defmodule Autocar.CMS do
   alias Autocar.Repo
 
   alias Autocar.CMS.Request
-  #alias Autocar.Accounts.User
-
-  
+    
   def list_requests do
     Repo.all(Request)
   end
 
   def get_by_user(user_id)do
     query = from r in Request, 
-    where: r.user_id == ^user_id 
+    join: a in assoc(r, :attachment),
+#    left_join: a in assoc(r, :attachment),
+    where: r.user_id == ^user_id and r.status != 2,
+    preload: [attachment: a],
+    order_by: r.inserted_at
+    Repo.all(query)
+  end 
+
+  def get_by_id(id)do
+    query = from r in Request, 
+    join: a in assoc(r, :attachment),
+    where: r.id == ^id,
+    preload: [attachment: a]
     Repo.all(query)
   end
-  ###
-  def get_request!(id) do
-    Request
-     |> Repo.get!(Request, id)
-     |> Repo.preload(:user)
+
+  def get_by_provider(provider_id) do
+    query = from r in Request, 
+    join: a in assoc(r, :attachment),
+    where: r.provider == ^provider_id,
+    preload: [attachment: a]
+    Repo.all(query)
   end
+
+  ###
+  
+  def get_request!(id), do: Repo.get!(Request, id)
 
   
   def create_request(attrs \\ %{}) do
+    IO.inspect "++++++++++++++++++++++++++++++++++++++"
     %Request{}
     |> Request.changeset(attrs)
     |> Repo.insert()
@@ -63,82 +80,30 @@ defmodule Autocar.CMS do
   end
 
   @doc """
-  Gets a single attachment.
-
-  Raises `Ecto.NoResultsError` if the Attachment does not exist.
-
-  ## Examples
-
-      iex> get_attachment!(123)
-      %Attachment{}
-
-      iex> get_attachment!(456)
-      ** (Ecto.NoResultsError)
-
+  ATTACHMENT
   """
   def get_attachment!(id), do: Repo.get!(Attachment, id)
 
-  @doc """
-  Creates a attachment.
-
-  ## Examples
-
-      iex> create_attachment(%{field: value})
-      {:ok, %Attachment{}}
-
-      iex> create_attachment(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
+  
   def create_attachment(attrs \\ %{}) do
     %Attachment{}
     |> Attachment.changeset(attrs)
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a attachment.
 
-  ## Examples
-
-      iex> update_attachment(attachment, %{field: new_value})
-      {:ok, %Attachment{}}
-
-      iex> update_attachment(attachment, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_attachment(%Attachment{} = attachment, attrs) do
     attachment
     |> Attachment.changeset(attrs)
     |> Repo.update()
   end
 
-  @doc """
-  Deletes a Attachment.
-
-  ## Examples
-
-      iex> delete_attachment(attachment)
-      {:ok, %Attachment{}}
-
-      iex> delete_attachment(attachment)
-      {:error, %Ecto.Changeset{}}
-
-  """
+  
   def delete_attachment(%Attachment{} = attachment) do
     Repo.delete(attachment)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking attachment changes.
-
-  ## Examples
-
-      iex> change_attachment(attachment)
-      %Ecto.Changeset{source: %Attachment{}}
-
-  """
+ 
   def change_attachment(%Attachment{} = attachment) do
     Attachment.changeset(attachment, %{})
   end

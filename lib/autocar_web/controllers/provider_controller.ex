@@ -17,13 +17,13 @@ defmodule AutocarWeb.ProviderController do
     end
 
     def update_provider(conn, %{"provider"=> provider_params, "id"=>id}) do
-        provider= Accounts.get_provider!(id)
+        provider = Accounts.get_provider!(id)
         case Accounts.update_provider(provider, provider_params) do
             {:ok, provider} ->
                 json conn, :updated
             {:error, provider} ->
                 json conn, nil
-        end
+        end 
     end
     
     def get_by_user_id(conn, %{"user_id"=> user_id}) do

@@ -43,20 +43,26 @@ defmodule AutocarWeb.Router do
      get "/email/users/:email", UserController, :show_email
      get "/logged/user/:token", UserController, :get_user_by_token
      get "/user/:id", UserController, :get_user_by_id
+     get "/user/full/:id", UserController, :show_full_data
      
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider
       post "/CMS/request", RequestController, :create 
       get "/CMS/request", RequestController, :get_by_user_id
      end
-
+     get "/CMS/requests", RequestController, :index
      post "/CMS/:request_id/attachments", AttachmentController, :create
+     put "/CMS/request/update/:id", RequestController, :update_request
+     get "/CMS/request/show/:id", RequestController, :show
+     get "/provider/:id/CMS/request/", RequestController, :get_request_by_provider;
+
      put "/provider/update/:id", ProviderController, :update_provider
      get "/providers/service/:service", ProviderController, :get_by_service
      get "/providers/user/:user_id", ProviderController, :get_by_user_id
      get "/providers", ProviderController, :index
 
-
+     post "/uploader/image/:attachment_id/:url_pic", UploaderController, :upload_image
+     resources "/attachments/create", AttachmentController
      
    end
 

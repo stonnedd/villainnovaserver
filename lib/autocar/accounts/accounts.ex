@@ -68,8 +68,18 @@ defmodule Autocar.Accounts do
 
   def get_email(email) do
     Repo.all(from c in User , where: c.email == ^email, select: c.email)
-  end 
-
+  end
+  
+  def get_full_data(id) do
+    query = from u in User, 
+    join: p in assoc(u, :providers),
+    join: r in assoc(u, :requests),
+    join: a in assoc(r, :attachment),
+    where: u.id == ^id,
+    preload: [providers: p],
+    preload: [requests: {r, attachment: a}]
+    Repo.all(query)
+  end
 
   ## PROVIDER
 

@@ -6,12 +6,6 @@ defmodule AutocarWeb.AuthController do
     
     plug :scrub_params, "user" when action in [:sign_in_user]
    
-
-    # defp login(conn, user) do
-    #     conn
-    #     |> Guardian.Plug.sign_in(conn, user)
-    # end
-
     def sing_in(conn, %{"session" => %{"email" => email,"password" => password}}) do 
         Auth.authenticate_user(email, password)
         |> login_reply(conn)
@@ -29,8 +23,6 @@ defmodule AutocarWeb.AuthController do
         |> Guardian.Plug.sign_in(user)
         jwt = new_conn
         |> Guardian.Plug.current_token
-        IO.inspect "********TOKEN:****"
-        IO.inspect jwt
         json conn, jwt
         jwt
     end

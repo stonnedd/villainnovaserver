@@ -47,6 +47,9 @@ defmodule Autocar.Mixfile do
       {:poison, "~> 3.1"},
       {:bcrypt_elixir, "~> 0.12"},
       {:ja_serializer, "~> 0.12.0"},
+      {:cloudex, "~> 1.0.0"},
+      {:uuid, "~> 1.1"},
+      {:arc, "~> 0.8.0"},
     ]
   end
 

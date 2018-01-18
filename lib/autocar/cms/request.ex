@@ -13,7 +13,6 @@ defmodule Autocar.CMS.Request do
     field :vehicle, :string
     field :status, :integer
     field :provider, :integer
-    #field :user_id, :id
     belongs_to :user, User
     has_one :attachment, Attachment
 
