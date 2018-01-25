@@ -90,12 +90,15 @@ defmodule AutocarWeb.UserController do
     json conn, user
   end
 
-def show_full_data(conn, %{"id" => id}) do
-    
-    
+  def show_full_data(conn, %{"id" => id}) do
     user = Accounts.get_full_data(id)
     |> IO.inspect
     render(conn, "show_full.json", user: user) 
-end
+  end
+
+  def get_users_providers(conn, %{"id" => id}) do
+    user = Accounts.get_users_providers(id)
+    render(conn, "show_providers.json", user: user) 
+  end
 
 end

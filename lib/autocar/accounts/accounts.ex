@@ -81,7 +81,13 @@ defmodule Autocar.Accounts do
     Repo.all(query)
   end
 
-  ## PROVIDER
+  def get_users_providers(id) do
+    query = from u in User, 
+    join: p in assoc(u, :providers),
+    where: u.id == ^id,
+    preload: [providers: p]
+    Repo.all(query)
+  end
 
   def list_providers do
     Repo.all(Provider)

@@ -14,6 +14,10 @@ defmodule AutocarWeb.UserView do
     %{user: render_many(user, UserView, "user_full.json")}
   end
 
+  def render("show_providers.json", %{user: user}) do
+    %{user: render_many(user, UserView, "user_providers.json")}
+  end
+
   def render("user.json", %{user: user}) do
     %{id: user.id,
       name: user.name,
@@ -33,6 +37,17 @@ defmodule AutocarWeb.UserView do
         token: user.token,
         providers: render_many(user.providers, UserView, "provider.json", as: :provider),
         requests: render_many(user.requests, UserView, "request.json", as: :request)
+    }
+  end
+
+  def render("user_providers.json", %{user: user}) do
+    %{  id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        profile: user.profile,
+        #token: user.token,
+        providers: render_many(user.providers, UserView, "provider.json", as: :provider),
     }
   end
 
