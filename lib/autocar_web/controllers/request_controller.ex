@@ -25,7 +25,8 @@ defmodule AutocarWeb.RequestController do
     attr = Map.put(request_params, "user_id" ,user_id)
     case CMS.create_request(attr)do
       {:ok, request} ->
-        #json conn, :ok
+        IO.inspect request        
+        #json conn, request.id
        render(conn, "show_partial.json", request: request)
       {:error, request} ->
         json conn, nil

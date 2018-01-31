@@ -12,7 +12,7 @@ defmodule Autocar.Accounts do
     |>Repo.preload([:providers])
     
   end
-  
+
   def get_user!(id) do
    User
     |>Repo.get!(id)
@@ -72,9 +72,9 @@ defmodule Autocar.Accounts do
   
   def get_full_data(id) do
     query = from u in User, 
-    join: p in assoc(u, :providers),
-    join: r in assoc(u, :requests),
-    join: a in assoc(r, :attachment),
+    left_join: p in assoc(u, :providers),
+    left_join: r in assoc(u, :requests),
+    left_join: a in assoc(r, :attachment),
     where: u.id == ^id,
     preload: [providers: p],
     preload: [requests: {r, attachment: a}]
@@ -83,11 +83,15 @@ defmodule Autocar.Accounts do
 
   def get_users_providers(id) do
     query = from u in User, 
-    join: p in assoc(u, :providers),
     where: u.id == ^id,
-    preload: [providers: p]
+    left_join: p in assoc(u, :providers),
+    left_join: r in assoc(p, :requests),
+    left_join: a in assoc(r, :attachment),
+    preload: [providers: {p, requests: {r, attachment: a}}]
     Repo.all(query)
+    |> IO.inspect
   end
+  
 
   def list_providers do
     Repo.all(Provider)

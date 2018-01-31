@@ -66,22 +66,12 @@ defmodule Autocar.CMS do
 
   alias Autocar.CMS.Attachment
 
-  @doc """
-  Returns the list of attachments.
-
-  ## Examples
-
-      iex> list_attachments()
-      [%Attachment{}, ...]
-
-  """
+  
   def list_attachments do
     Repo.all(Attachment)
   end
 
-  @doc """
-  ATTACHMENT
-  """
+  
   def get_attachment!(id), do: Repo.get!(Attachment, id)
 
   

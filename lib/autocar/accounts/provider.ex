@@ -2,7 +2,8 @@ defmodule Autocar.Accounts.Provider do
   use Ecto.Schema
   import Ecto.Changeset
   alias Autocar.Accounts.{Provider, User}
-
+  alias Autocar.CMS.Request
+  
   schema "providers" do
     field :address, :string
     field :aditional_phone, :string
@@ -19,6 +20,7 @@ defmodule Autocar.Accounts.Provider do
     field :specialty, :string
     field :website, :string
     belongs_to :user, User, foreign_key: :user_id 
+    has_many :requests, Request
 
     timestamps()
   end

@@ -24,23 +24,25 @@ defmodule AutocarWeb.RequestView do
       vehicle: request.vehicle,
       lng: request.lng,
       lat: request.lat,
-      provider: request.provider,
+      provider_id: request.provider_id,
       status: request.status,
+      p_status: request.p_status,
       user_id: request.user_id,
       created_at: request.inserted_at,
       url_pic1: request.attachment.url_pic1,
       url_pic2: request.attachment.url_pic2,
-      url_pic3: request.attachment.url_pic3
+      url_pic3: request.attachment.url_pic3,
+      #provider: render_one(user.providers, RequestView, "provider.json", as: :provider)
      
     }
   end
 
   def render("request_partial.json", %{request: request}) do
-    %{id: request.id,
-      comment: request.comment,
-      provider: request.provider,
-      status: request.status,
-      user_id: request.user_id,
+    %{id: request.id
+      # comment: request.comment,
+      # provider: request.provider,
+      # status: request.status,
+      # user_id: request.user_id,
     }
   end
 

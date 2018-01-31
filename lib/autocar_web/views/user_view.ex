@@ -6,9 +6,14 @@ defmodule AutocarWeb.UserView do
     %{users: render_many(users, UserView, "user.json")}
   end
 
+  def render("customer.json", %{user: user}) do
+    %{customer: render_one(user, UserView, "customer_data.json")}
+  end
+
   def render("show.json", %{user: user}) do
     %{user: render_one(user, UserView, "user.json")}
   end
+
 
   def render("show_full.json", %{user: user}) do
     %{user: render_many(user, UserView, "user_full.json")}
@@ -48,8 +53,20 @@ defmodule AutocarWeb.UserView do
         profile: user.profile,
         #token: user.token,
         providers: render_many(user.providers, UserView, "provider.json", as: :provider),
+        
     }
   end
+
+
+  def render("customer_data.json", %{user: user}) do
+    %{  
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+    }
+  end
+
+
 
   def render("provider.json", %{provider: provider}) do
     %{ id: provider.id,
@@ -67,7 +84,9 @@ defmodule AutocarWeb.UserView do
       service: provider.service,
       specialty: provider.specialty,
       website: provider.website,
-      status: provider.status
+      status: provider.status,
+      providers_requests: render_many(provider.requests, UserView, "provider_request.json", as: :request),
+      
     }
   end
 
@@ -78,13 +97,37 @@ defmodule AutocarWeb.UserView do
       vehicle: request.vehicle,
       lng: request.lng,
       lat: request.lat,
-      provider: request.provider,
+      provider_id: request.provider_id,
       status: request.status,
       user_id: request.user_id,
       url_pic1: request.attachment.url_pic1,
       url_pic2: request.attachment.url_pic2,
       url_pic3: request.attachment.url_pic3,
       created_at: request.inserted_at
+    }
+  end
+  def render("provider_request.json", %{request: request}) do
+    %{id: request.id,
+      service: request.service,
+      comment: request.comment,
+      vehicle: request.vehicle,
+      lng: request.lng,
+      lat: request.lat,
+      provider_id: request.provider_id,
+      status: request.status,
+      p_status: request.p_status,
+      user_id: request.user_id,
+      created_at: request.inserted_at,
+      attachment: render_one(request.attachment, UserView, "attachment.json", as: :attachment),
+    }
+  end
+
+  def render("attachment.json", %{attachment: attachment}) do
+    %{id: attachment.id,
+      url_pic1: attachment.url_pic1,
+      url_pic2: attachment.url_pic2,
+      url_pic3: attachment.url_pic3,
+      request_id: attachment.request_id,
     }
   end
 

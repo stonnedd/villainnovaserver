@@ -45,6 +45,13 @@ defmodule AutocarWeb.UserController do
     #json conn, user
   end
 
+  def get_customer_data(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    |> IO.inspect
+   # json conn, :ok
+    render(conn, "customer.json", user: user)
+  end
+
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)
@@ -97,6 +104,7 @@ defmodule AutocarWeb.UserController do
   end
 
   def get_users_providers(conn, %{"id" => id}) do
+    IO.inspect "----------------------------------"
     user = Accounts.get_users_providers(id)
     render(conn, "show_providers.json", user: user) 
   end
