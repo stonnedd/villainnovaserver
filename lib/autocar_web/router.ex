@@ -46,7 +46,6 @@ defmodule AutocarWeb.Router do
      get "/user/full/:id", UserController, :show_full_data
      get "/user/providers/:id", UserController, :get_users_providers
      
-     
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider
       post "/CMS/request", RequestController, :create 
@@ -54,6 +53,8 @@ defmodule AutocarWeb.Router do
      end
      get "/CMS/requests", RequestController, :index
      post "/CMS/:request_id/attachments", AttachmentController, :create
+     post "/CMS/proposal/create", ProposalController, :create
+     get "/CMS/proposals/index", ProposalController, :index
      put "/CMS/request/update/:id", RequestController, :update_request
      get "/CMS/request/show/:id", RequestController, :show
      get "/provider/:id/CMS/request/", RequestController, :get_request_by_provider;

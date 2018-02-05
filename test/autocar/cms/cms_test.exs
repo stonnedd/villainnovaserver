@@ -144,4 +144,72 @@ defmodule Autocar.CMSTest do
       assert %Ecto.Changeset{} = CMS.change_attachment(attachment)
     end
   end
+
+  describe "proposals" do
+    alias Autocar.CMS.Proposal
+
+    @valid_attrs %{c_status: 42, comment: "some comment", p_status: 42, price: 42, time: "some time"}
+    @update_attrs %{c_status: 43, comment: "some updated comment", p_status: 43, price: 43, time: "some updated time"}
+    @invalid_attrs %{c_status: nil, comment: nil, p_status: nil, price: nil, time: nil}
+
+    def proposal_fixture(attrs \\ %{}) do
+      {:ok, proposal} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> CMS.create_proposal()
+
+      proposal
+    end
+
+    test "list_proposals/0 returns all proposals" do
+      proposal = proposal_fixture()
+      assert CMS.list_proposals() == [proposal]
+    end
+
+    test "get_proposal!/1 returns the proposal with given id" do
+      proposal = proposal_fixture()
+      assert CMS.get_proposal!(proposal.id) == proposal
+    end
+
+    test "create_proposal/1 with valid data creates a proposal" do
+      assert {:ok, %Proposal{} = proposal} = CMS.create_proposal(@valid_attrs)
+      assert proposal.c_status == 42
+      assert proposal.comment == "some comment"
+      assert proposal.p_status == 42
+      assert proposal.price == 42
+      assert proposal.time == "some time"
+    end
+
+    test "create_proposal/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_proposal(@invalid_attrs)
+    end
+
+    test "update_proposal/2 with valid data updates the proposal" do
+      proposal = proposal_fixture()
+      assert {:ok, proposal} = CMS.update_proposal(proposal, @update_attrs)
+      assert %Proposal{} = proposal
+      assert proposal.c_status == 43
+      assert proposal.comment == "some updated comment"
+      assert proposal.p_status == 43
+      assert proposal.price == 43
+      assert proposal.time == "some updated time"
+    end
+
+    test "update_proposal/2 with invalid data returns error changeset" do
+      proposal = proposal_fixture()
+      assert {:error, %Ecto.Changeset{}} = CMS.update_proposal(proposal, @invalid_attrs)
+      assert proposal == CMS.get_proposal!(proposal.id)
+    end
+
+    test "delete_proposal/1 deletes the proposal" do
+      proposal = proposal_fixture()
+      assert {:ok, %Proposal{}} = CMS.delete_proposal(proposal)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_proposal!(proposal.id) end
+    end
+
+    test "change_proposal/1 returns a proposal changeset" do
+      proposal = proposal_fixture()
+      assert %Ecto.Changeset{} = CMS.change_proposal(proposal)
+    end
+  end
 end

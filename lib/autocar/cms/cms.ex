@@ -11,10 +11,11 @@ defmodule Autocar.CMS do
 
   def get_by_user(user_id)do
     query = from r in Request, 
+    left_join: p in assoc(r, :proposal),
     join: a in assoc(r, :attachment),
-#    left_join: a in assoc(r, :attachment),
     where: r.user_id == ^user_id and r.status != 2,
     preload: [attachment: a],
+    preload: [proposal: p],
     order_by: r.inserted_at
     Repo.all(query)
   end 
@@ -96,5 +97,42 @@ defmodule Autocar.CMS do
  
   def change_attachment(%Attachment{} = attachment) do
     Attachment.changeset(attachment, %{})
+  end
+
+  alias Autocar.CMS.Proposal
+
+  #PROPOSALS
+  
+  def list_proposals do
+    Repo.all(Proposal)
+  end
+
+
+  def get_proposal!(id), do: Repo.get!(Proposal, id)
+
+  
+  def create_proposal(attrs \\ %{}) do
+    %Proposal{}
+    |> Proposal.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  
+
+
+  def update_proposal(%Proposal{} = proposal, attrs) do
+    proposal
+    |> Proposal.changeset(attrs)
+    |> Repo.update()
+  end
+
+
+  def delete_proposal(%Proposal{} = proposal) do
+    Repo.delete(proposal)
+  end
+
+ 
+  def change_proposal(%Proposal{} = proposal) do
+    Proposal.changeset(proposal, %{})
   end
 end

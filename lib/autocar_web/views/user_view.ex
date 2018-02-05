@@ -118,7 +118,10 @@ defmodule AutocarWeb.UserView do
       p_status: request.p_status,
       user_id: request.user_id,
       created_at: request.inserted_at,
-      attachment: render_one(request.attachment, UserView, "attachment.json", as: :attachment),
+      url_pic1: request.attachment.url_pic1,
+      url_pic2: request.attachment.url_pic2,
+      url_pic3: request.attachment.url_pic3
+      #attachment: render_one(request.attachment, UserView, "attachment.json", as: :attachment),
     }
   end
 

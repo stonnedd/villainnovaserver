@@ -1,7 +1,7 @@
 defmodule Autocar.CMS.Request do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Autocar.CMS.{Request, Attachment}
+  alias Autocar.CMS.{Request, Attachment, Proposal}
   alias Autocar.Accounts.{User, Provider}
 
 
@@ -16,6 +16,7 @@ defmodule Autocar.CMS.Request do
     belongs_to :user, User
     belongs_to :provider, Provider
     has_one :attachment, Attachment
+    has_one :proposal, Proposal
 
     timestamps()
   end

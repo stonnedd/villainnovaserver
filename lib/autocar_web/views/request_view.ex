@@ -32,7 +32,7 @@ defmodule AutocarWeb.RequestView do
       url_pic1: request.attachment.url_pic1,
       url_pic2: request.attachment.url_pic2,
       url_pic3: request.attachment.url_pic3,
-      #provider: render_one(user.providers, RequestView, "provider.json", as: :provider)
+      proposal: render_one(request.proposal, RequestView, "proposal.json", as: :proposal)
      
     }
   end
@@ -43,6 +43,16 @@ defmodule AutocarWeb.RequestView do
       # provider: request.provider,
       # status: request.status,
       # user_id: request.user_id,
+    }
+  end
+
+  def render("proposal.json", %{proposal: proposal}) do
+    %{
+      c_status: proposal.c_status,
+      p_status: proposal.p_status,
+      price: proposal.price,
+      time: proposal.time,
+      comment: proposal.comment
     }
   end
 

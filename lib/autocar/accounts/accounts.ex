@@ -4,7 +4,8 @@ defmodule Autocar.Accounts do
 
   alias Autocar.Repo
   alias Autocar.Accounts.{User, Provider}
-  
+  alias Autocar.CMS.Request
+
   #USER  
   def list_users do
     User
@@ -82,12 +83,14 @@ defmodule Autocar.Accounts do
   end
 
   def get_users_providers(id) do
+    rqst_query = from r in Request, where: r.p_status == 0
     query = from u in User, 
-    where: u.id == ^id,
+    where: u.id == ^id,  
     left_join: p in assoc(u, :providers),
-    left_join: r in assoc(p, :requests),
+    left_join: r in assoc(p, :requests), 
     left_join: a in assoc(r, :attachment),
-    preload: [providers: {p, requests: {r, attachment: a}}]
+    preload: [providers: {p, requests: ^rqst_query, requests: :attachment  } ]
+#    preload: [providers: {p, requests: ^rqst_query, {r, attachment: a }} ]
     Repo.all(query)
     |> IO.inspect
   end
