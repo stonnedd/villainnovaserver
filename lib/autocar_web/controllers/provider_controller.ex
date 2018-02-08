@@ -9,19 +9,19 @@ defmodule AutocarWeb.ProviderController do
     def add_provider(conn, %{"provider"=> provider_params, "user_id"=> user_id }) do
         attr = Map.put(provider_params, "user_id" ,user_id)
         case Accounts.create_provider(attr)do
-            {:ok, provider} ->
+            {:ok, _provider} ->
                 json conn, :ok
-            {:error, provider} ->
+            {:error, _provider} ->
                 json conn, nil
         end
     end
 
     def update_provider(conn, %{"provider"=> provider_params, "id"=>id}) do
-        provider = Accounts.get_provider!(id)
+        provider = Accounts.get_provider(id)
         case Accounts.update_provider(provider, provider_params) do
-            {:ok, provider} ->
+            {:ok, _provider} ->
                 json conn, :updated
-            {:error, provider} ->
+            {:error, _provider} ->
                 json conn, nil
         end 
     end
@@ -41,5 +41,21 @@ defmodule AutocarWeb.ProviderController do
         render(conn, "index.json", providers: providers)
     end 
 
+    def get_by_id(conn, %{"id" => id}) do
+        providers = Accounts.get_provider(id)
+        render(conn, "show.json", provider: providers)
+    end
+
+    def rate_provider(conn, %{"provider"=> score_data, "id"=>id}) do
+        provider = Accounts.get_provider(id)
+        provider_params = %{"ranking" => (Map.get(score_data, "score") + provider.ranking) / 2 }
+        json conn, :ok
+        case Accounts.update_provider(provider, provider_params) do
+            {:ok, _provider} ->
+                json conn, :updated
+            {:error, _provider} ->
+                json conn, nil
+        end 
+    end
 
 end

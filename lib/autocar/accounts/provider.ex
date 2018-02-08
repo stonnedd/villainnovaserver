@@ -15,6 +15,7 @@ defmodule Autocar.Accounts.Provider do
     field :lng, :float
     field :map_icon, :string
     field :ranking, :float
+    field :ranking_count, :integer
     field :schedule, :string
     field :service, :string
     field :specialty, :string
@@ -28,7 +29,7 @@ defmodule Autocar.Accounts.Provider do
   @doc false
   def changeset(%Provider{} = provider, attrs) do
     provider
-    |> cast(attrs, [:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :schedule, :service, :specialty, :website, :is_active, :status, :user_id])
+    |> cast(attrs, [:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :ranking_count, :schedule, :service, :specialty, :website, :is_active, :status, :user_id])
     #|> validate_required([])
     #|> validate_required([:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :schedule, :service, :specialty, :website, :is_active])
   end

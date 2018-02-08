@@ -10,7 +10,8 @@ defmodule Autocar.Repo.Migrations.CreateProviders do
       add :lng, :float
       add :map_icon, :string
       add :aditional_phone, :string
-      add :ranking, :float
+      add :ranking, :float, default: 0.0
+      add :ranking_count, :integer, default: 1
       add :schedule, :string
       add :service, :string
       add :specialty, :string

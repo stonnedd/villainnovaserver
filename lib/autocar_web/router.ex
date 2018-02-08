@@ -60,8 +60,10 @@ defmodule AutocarWeb.Router do
      get "/provider/:id/CMS/request/", RequestController, :get_request_by_provider;
 
      put "/provider/update/:id", ProviderController, :update_provider
+     put "/provider/rate/:id", ProviderController, :rate_provider
      get "/providers/service/:service", ProviderController, :get_by_service
      get "/providers/user/:user_id", ProviderController, :get_by_user_id
+     get "/provider/:id", ProviderController, :get_by_id
      get "/providers", ProviderController, :index
      get "/provider/customer/:id", UserController, :get_customer_data
      post "/uploader/image/:attachment_id/:url_pic", UploaderController, :upload_image

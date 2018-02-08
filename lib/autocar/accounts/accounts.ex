@@ -83,14 +83,14 @@ defmodule Autocar.Accounts do
   end
 
   def get_users_providers(id) do
-    rqst_query = from r in Request, where: r.p_status == 0
+    rqst_query = from r in Request, where: r.p_status == 0,  order_by: [desc: r.inserted_at]
     query = from u in User, 
     where: u.id == ^id,  
     left_join: p in assoc(u, :providers),
     left_join: r in assoc(p, :requests), 
     left_join: a in assoc(r, :attachment),
     preload: [providers: {p, requests: ^rqst_query, requests: :attachment  } ]
-#    preload: [providers: {p, requests: ^rqst_query, {r, attachment: a }} ]
+#   preload: [providers: {p, requests: ^rqst_query, {r, attachment: a }} ]
     Repo.all(query)
     |> IO.inspect
   end
@@ -106,7 +106,7 @@ defmodule Autocar.Accounts do
     Repo.all(query)
   end 
 
-  def get_provider!(id) do
+  def get_provider(id) do
      Repo.get!(Provider, id)
   end
 

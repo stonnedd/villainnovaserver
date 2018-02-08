@@ -13,10 +13,10 @@ defmodule Autocar.CMS do
     query = from r in Request, 
     left_join: p in assoc(r, :proposal),
     join: a in assoc(r, :attachment),
-    where: r.user_id == ^user_id and r.status != 2,
+    where: r.user_id == ^user_id and r.status != 3,
     preload: [attachment: a],
     preload: [proposal: p],
-    order_by: r.inserted_at
+    order_by: [desc: r.inserted_at]
     Repo.all(query)
   end 
 

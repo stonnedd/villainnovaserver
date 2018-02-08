@@ -48,6 +48,7 @@ defmodule AutocarWeb.RequestView do
 
   def render("proposal.json", %{proposal: proposal}) do
     %{
+      id: proposal.id,
       c_status: proposal.c_status,
       p_status: proposal.p_status,
       price: proposal.price,
