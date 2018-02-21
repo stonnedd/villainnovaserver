@@ -4,7 +4,8 @@ defmodule Autocar.Accounts do
 
   alias Autocar.Repo
   alias Autocar.Accounts.{User, Provider}
-  alias Autocar.CMS.Request
+  alias Autocar.CMS.{Request, Proposal}
+  import Geo.PostGIS
 
   #USER  
   def list_users do
@@ -55,11 +56,9 @@ defmodule Autocar.Accounts do
       Repo.all(query) 
   end 
 
-  def get_user_by_id(id) do
-    # query = (from u in User, where: u.id == ^id)
-    # |> Repo.all()     
-    # |> Repo.preload(:providers)
+  
 
+  def get_user_by_id(id) do
     query = from u in User, 
       where: u.id == ^id,
       select: %{id: u.id, name: u.name, email: u.email, phone: u.phone, profile: u.profile}
@@ -94,7 +93,13 @@ defmodule Autocar.Accounts do
     Repo.all(query)
     |> IO.inspect
   end
-  
+
+  def get_providers_ids_by_user_id(user_id)do
+    query= from p in Provider,
+    where: p.user_id == ^user_id,
+    select: %{provider_id: p.id} 
+    Repo.all(query);
+  end
 
   def list_providers do
     Repo.all(Provider)
@@ -116,13 +121,28 @@ defmodule Autocar.Accounts do
     Repo.all(query)
   end 
 
- 
+  def get_pro_by_svc_zone(service, user_point, distance, limit) do
+     query = from p in Provider,
+     where: p.service == ^service and st_dwithin_in_meters(p.point, ^user_point, ^distance), 
+     limit: ^limit,
+     select: %{id: p.id, name: p.company_name}
+     Repo.all(query)
+    |>IO.inspect
+
+  end 
+
+  def get_pro_by_svc_zone_full(service, user_point, distance, limit) do
+    query = from p in Provider,
+    where: p.service == ^service and st_dwithin_in_meters(p.point, ^user_point, ^distance), 
+    limit: ^limit
+    Repo.all(query)
+   |>IO.inspect
+
+ end
+
   def create_provider(attrs \\ %{}) do
-    IO.inspect "_______________________________________________________"
      %Provider{}
      |> Provider.changeset(attrs)
-     #|> Repo.preload(:user)
-     #|> Ecto.Changeset.cast_assoc(:user, with: &User.changeset/2)
      |> Repo.insert()
   end
 

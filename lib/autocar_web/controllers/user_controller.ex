@@ -3,13 +3,13 @@ defmodule AutocarWeb.UserController do
 
   alias Autocar.Accounts
   alias Autocar.Accounts.User
+  alias Autocar.CMS
+  alias Autocar.CMS.Request
 
   def index(conn, _params) do
     users = Accounts.list_users()
-    IO.inspect "++++++++++++++++++++++++"
-    IO.inspect users
+    
     render(conn, "index.json", users: users)
-    #json conn, users
   end
 
   def new(conn, _params) do
@@ -42,13 +42,11 @@ defmodule AutocarWeb.UserController do
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     render(conn, "show.json", user: user)
-    #json conn, user
   end
 
   def get_customer_data(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     |> IO.inspect
-   # json conn, :ok
     render(conn, "customer.json", user: user)
   end
 
@@ -92,9 +90,17 @@ defmodule AutocarWeb.UserController do
 
   def get_user_by_id(conn, %{"id" => id}) do
     user = Accounts.get_user_by_id(id)
-    IO.inspect "USER::::::::::::::::::"
-    IO.inspect user
     json conn, user
+  end
+
+  def get_user_notifications(conn, %{"id" => id})do
+    providers= Accounts.get_providers_ids_by_user_id(id)
+    qty = Enum.reduce(providers, [], fn p, acc -> 
+      acc ++ [CMS.get_quantity_requests_by_provider(p.provider_id)]
+      |> IO.inspect
+      end)
+    rqts = CMS.get_quantity_requests_by_user_id(id)
+    json conn, %{proposals: rqts, p_requests: Enum.sum(qty)} 
   end
 
   def show_full_data(conn, %{"id" => id}) do
@@ -104,7 +110,6 @@ defmodule AutocarWeb.UserController do
   end
 
   def get_users_providers(conn, %{"id" => id}) do
-    IO.inspect "----------------------------------"
     user = Accounts.get_users_providers(id)
     render(conn, "show_providers.json", user: user) 
   end

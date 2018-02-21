@@ -20,6 +20,7 @@ defmodule Autocar.Accounts.Provider do
     field :service, :string
     field :specialty, :string
     field :website, :string
+    field :point, Geo.Point 
     belongs_to :user, User, foreign_key: :user_id 
     has_many :requests, Request
 
@@ -29,7 +30,7 @@ defmodule Autocar.Accounts.Provider do
   @doc false
   def changeset(%Provider{} = provider, attrs) do
     provider
-    |> cast(attrs, [:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :ranking_count, :schedule, :service, :specialty, :website, :is_active, :status, :user_id])
+    |> cast(attrs, [:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :ranking_count, :schedule, :service, :specialty, :website, :is_active, :status, :user_id, :point])
     #|> validate_required([])
     #|> validate_required([:company_name, :address, :brands, :lat, :lng, :map_icon, :aditional_phone, :ranking, :schedule, :service, :specialty, :website, :is_active])
   end

@@ -22,7 +22,7 @@ defmodule AutocarWeb.UserView do
   def render("show_providers.json", %{user: user}) do
     %{user: render_many(user, UserView, "user_providers.json")}
   end
-
+  
   def render("user.json", %{user: user}) do
     %{id: user.id,
       name: user.name,

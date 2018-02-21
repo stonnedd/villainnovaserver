@@ -16,9 +16,11 @@ defmodule Autocar.CMS do
     where: r.user_id == ^user_id and r.status != 3,
     preload: [attachment: a],
     preload: [proposal: p],
-    order_by: [desc: r.inserted_at]
+    order_by: [asc: r.service, desc: r.inserted_at]
     Repo.all(query)
   end 
+
+  
 
   def get_by_id(id)do
     query = from r in Request, 
@@ -40,9 +42,19 @@ defmodule Autocar.CMS do
   
   def get_request!(id), do: Repo.get!(Request, id)
 
-  
+  def get_quantity_requests_by_provider(id)do
+    query= from r in Request,
+    where: r.provider_id == ^id and r.status == 0 and r.status == 0
+    Repo.aggregate(query, :count, :status)
+  end
+
+  def get_quantity_requests_by_user_id(user_id)do
+    query = from r in Request, 
+    where: r.user_id == ^user_id and r.status == 1
+    Repo.aggregate(query, :count, :status)
+  end
+
   def create_request(attrs \\ %{}) do
-    IO.inspect "++++++++++++++++++++++++++++++++++++++"
     %Request{}
     |> Request.changeset(attrs)
     |> Repo.insert()

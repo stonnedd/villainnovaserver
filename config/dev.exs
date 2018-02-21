@@ -55,4 +55,5 @@ config :autocar, Autocar.Repo,
   password: "postgres",
   database: "autocar_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 10,
+  types: Autocar.PostgresTypes

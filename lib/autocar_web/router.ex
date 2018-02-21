@@ -45,6 +45,7 @@ defmodule AutocarWeb.Router do
      get "/user/:id", UserController, :get_user_by_id
      get "/user/full/:id", UserController, :show_full_data
      get "/user/providers/:id", UserController, :get_users_providers
+     get "/user/notification/:id", UserController, :get_user_notifications
      
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider
@@ -57,16 +58,21 @@ defmodule AutocarWeb.Router do
      get "/CMS/proposals/index", ProposalController, :index
      put "/CMS/request/update/:id", RequestController, :update_request
      get "/CMS/request/show/:id", RequestController, :show
-     get "/provider/:id/CMS/request/", RequestController, :get_request_by_provider;
-
+     get "/provider/:id/CMS/request/", RequestController, :get_request_by_provider
+     post "/CMS/request/multiple/create", RequestController, :create_multiple_requests
+     
+     post "/providers/distance/", ProviderController, :get_by_service_zone
      put "/provider/update/:id", ProviderController, :update_provider
      put "/provider/rate/:id", ProviderController, :rate_provider
      get "/providers/service/:service", ProviderController, :get_by_service
+     post "/providers/distance/full", ProviderController, :get_by_service_full
      get "/providers/user/:user_id", ProviderController, :get_by_user_id
      get "/provider/:id", ProviderController, :get_by_id
      get "/providers", ProviderController, :index
      get "/provider/customer/:id", UserController, :get_customer_data
      post "/uploader/image/:attachment_id/:url_pic", UploaderController, :upload_image
+     post "/uploader/img/", UploaderController, :upload_img
+     
      resources "/attachments/create", AttachmentController
      
    end

@@ -19,10 +19,12 @@ defmodule Autocar.Repo.Migrations.CreateProviders do
       add :is_active, :boolean, default: false, null: false
       add :status, :integer, default: 0
       add :user_id, references(:users, on_delete: :delete_all), null: false
+      add :point, :geography
         
       timestamps()
     end
 
     create index(:providers, [:user_id])
+    create index(:providers, [:point])
   end
 end

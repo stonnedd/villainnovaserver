@@ -16,4 +16,5 @@ config :autocar, Autocar.Repo,
   password: "postgres",
   database: "autocar_test",
   hostname: "localhost",
-  pool: Ecto.Adapters.SQL.Sandbox
+  pool: Ecto.Adapters.SQL.Sandbox,
+  types: Autocar.PostgresTypes

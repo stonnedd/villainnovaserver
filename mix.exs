@@ -50,6 +50,8 @@ defmodule Autocar.Mixfile do
       {:cloudex, "~> 1.0.0"},
       {:uuid, "~> 1.1"},
       {:arc, "~> 0.8.0"},
+      {:geo_postgis, "~> 1.0"},
+
     ]
   end
 

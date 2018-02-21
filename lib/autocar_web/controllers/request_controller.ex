@@ -33,6 +33,33 @@ defmodule AutocarWeb.RequestController do
     end
   end
 
+
+  def create_multiple_requests(conn, %{"request" => request_params}) do
+    IO.inspect request_params
+    providers = Map.get(request_params, "providers")
+    attachment_params = Map.get(request_params, "attachments")
+    Enum.each(providers, fn(p)-> 
+      attr = Map.delete(request_params, "providers")
+      |> Map.delete("Attachments")
+      |> Map.put("provider_id", p)
+      case CMS.create_request(attr)do
+        {:ok, request} ->
+          request.id
+          attachment_attr = Map.put( attachment_params, "request_id", request.id )
+          case CMS.create_attachment(attachment_attr) do
+            {:ok, attachment} ->
+              IO.inspect attachment
+            {:error, request} ->
+              json conn, nil
+          end  
+        {:error, request} ->
+          json conn, nil
+      end      
+    end
+    )
+    json conn, :ok
+  end
+
   def show(conn, %{"id" => id}) do
     request = CMS.get_request!(id)
     json conn, request
