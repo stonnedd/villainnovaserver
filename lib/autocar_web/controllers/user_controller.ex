@@ -60,12 +60,10 @@ defmodule AutocarWeb.UserController do
     user = Accounts.get_user!(id)
 
     case Accounts.update_user(user, user_params) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+      {:ok, _user} ->
+        json conn, :updated
+      {:error, _user} ->
+        json conn, nil
     end
   end
 
