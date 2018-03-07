@@ -46,6 +46,7 @@ defmodule AutocarWeb.Router do
      get "/user/full/:id", UserController, :show_full_data
      get "/user/providers/:id", UserController, :get_users_providers
      get "/user/notification/:id", UserController, :get_user_notifications
+     get "/user/providers/getids/:id", UserController, :get_users_providers_ids
      
      resources "/users", UserController do
       post "/provider", ProviderController, :add_provider

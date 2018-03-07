@@ -92,7 +92,7 @@ defmodule AutocarWeb.UserController do
   end
 
   def get_user_notifications(conn, %{"id" => id})do
-    providers= Accounts.get_providers_ids_by_user_id(id)
+    providers = Accounts.get_providers_ids_by_user_id(id)
     qty = Enum.reduce(providers, [], fn p, acc -> 
       acc ++ [CMS.get_quantity_requests_by_provider(p.provider_id)]
       |> IO.inspect
@@ -111,5 +111,13 @@ defmodule AutocarWeb.UserController do
     user = Accounts.get_users_providers(id)
     render(conn, "show_providers.json", user: user) 
   end
+
+
+  def get_users_providers_ids(conn, %{"id"=>id})do
+    ids = Accounts.get_providers_ids_by_user_id(id)
+    json conn, ids
+  end
+
+
 
 end
