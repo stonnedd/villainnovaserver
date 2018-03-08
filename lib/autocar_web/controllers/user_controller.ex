@@ -95,7 +95,6 @@ defmodule AutocarWeb.UserController do
     providers = Accounts.get_providers_ids_by_user_id(id)
     qty = Enum.reduce(providers, [], fn p, acc -> 
       acc ++ [CMS.get_quantity_requests_by_provider(p.provider_id)]
-      |> IO.inspect
       end)
     rqts = CMS.get_quantity_requests_by_user_id(id)
     json conn, %{proposals: rqts, p_requests: Enum.sum(qty)} 
@@ -103,7 +102,6 @@ defmodule AutocarWeb.UserController do
 
   def show_full_data(conn, %{"id" => id}) do
     user = Accounts.get_full_data(id)
-    |> IO.inspect
     render(conn, "show_full.json", user: user) 
   end
 
