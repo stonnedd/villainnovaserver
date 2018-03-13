@@ -14,7 +14,7 @@ defmodule AutocarWeb.AuthController do
     end   
 
     defp login_reply({:error, error}, conn) do
-        conn
+        #conn
         json conn, error
     end
     

@@ -4,6 +4,7 @@ defmodule Autocar.Repo.Migrations.CreateProviders do
   def change do
     create table(:providers) do
       add :company_name, :string
+      add :company_email, :string
       add :address, :string
       add :brands, :string
       add :lat, :float
@@ -12,6 +13,7 @@ defmodule Autocar.Repo.Migrations.CreateProviders do
       add :aditional_phone, :string
       add :ranking, :float, default: 0.0
       add :ranking_count, :integer, default: 1
+      add :ranking_values, {:array, :integer}	
       add :schedule, :string
       add :service, :string
       add :specialty, :string
