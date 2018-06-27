@@ -10,7 +10,7 @@ defmodule Autocar.Accounts.Provider do
     field :brands, :string
     field :company_name, :string
     field :company_email, :string
-    field :is_active, :boolean, default: false
+    field :is_active, :integer, default: 0
     field :status, :integer
     field :lat, :float
     field :lng, :float

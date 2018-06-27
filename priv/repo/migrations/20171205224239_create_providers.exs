@@ -18,7 +18,7 @@ defmodule Autocar.Repo.Migrations.CreateProviders do
       add :service, :string
       add :specialty, :string
       add :website, :string
-      add :is_active, :boolean, default: false, null: false
+      add :is_active, :integer, default: 0, null: false
       add :status, :integer, default: 0
       add :user_id, references(:users, on_delete: :delete_all), null: false
       add :point, :geography
